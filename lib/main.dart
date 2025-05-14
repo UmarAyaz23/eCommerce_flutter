@@ -68,7 +68,7 @@ class homeScreen extends StatelessWidget {
       ),
 
       body: GridView.builder(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(10),
         itemCount: products.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
@@ -86,11 +86,20 @@ class homeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Image.network(product.imageURL, height: 30),
+                CircleAvatar(
+                  radius: 30,
+                  backgroundImage: NetworkImage(product.imageURL),
+                  backgroundColor: Color(0xeeeeeeee),
                 ),
                 SizedBox(height: 10,),
-                Text(product.title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: red)),
+                Flexible(
+                  child: Text(
+                    product.title,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
                 Text("Price: ${product.price.toString()}", style: Theme.of(context).textTheme.bodyMedium,),
               ],
             ),
@@ -118,7 +127,11 @@ class productScreen extends StatelessWidget {
         padding: EdgeInsets.all(15),
         child: Column(
           children: <Widget>[
-            Image.network(product.imageURL, height: 150,),
+            CircleAvatar(
+              radius: 80,
+              backgroundImage: NetworkImage(product.imageURL),
+              backgroundColor: Color(0xeeeeeeee),
+            ),
             SizedBox(height: 20,),
             Text(product.title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: red)),
             SizedBox(height: 10,),
@@ -171,13 +184,18 @@ class receiptScreen extends StatelessWidget {
             Column(
               children: [
                 Text("Thank you for your purchase!", style: Theme.of(context).textTheme.bodyMedium,),
-                Image.network(product.imageURL, height: 150,),
+                SizedBox(height: 20,),
+                CircleAvatar(
+                  radius: 80,
+                  backgroundImage: NetworkImage(product.imageURL),
+                  backgroundColor: Color(0xeeeeeeee),
+                ),
                 SizedBox(height: 20,),
                 Text(product.title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: red),),
                 SizedBox(height: 10,),
                 Text(product.desc, style: Theme.of(context).textTheme.bodyMedium,),
                 SizedBox(height: 10,),
-                Text("Price: ${product.price.toString()}", style: Theme.of(context).textTheme.bodyMedium,),
+                Text("Total: ${product.price.toString()}", style: Theme.of(context).textTheme.bodyMedium,),
               ],
             )
           ],
